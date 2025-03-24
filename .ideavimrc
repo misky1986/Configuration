@@ -1,18 +1,14 @@
-"" .ideavimrc - Matt Chapman
-
-
+"" ========================================================
 "" Base Settings
 "" ========================================================
-
 set scrolloff=10
+set history=1000
 set linenumber
 set showmode
 set showcmd
-
 set smartcase
 set incsearch
 set hlsearch
-
 set visualbell
 
 " Use system clipboard
@@ -20,188 +16,161 @@ set clipboard+=unnamed
 
 let mapleader = " "
 
-
+"" ========================================================
 "" Plugin Settings
 "" ========================================================
-
+set commentary
 set surround
-set highlightedyank
-set sneak
 set nerdtree
 
-" Easymotion settings
+" Searching Plugins
+set sneak
 set easymotion
-set notimeout
+let g:EasyMotion_override_acejump = 0
+
+" Highlighting Plugins
+set highlightedyank
+" set quickscope
+" let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 " Which-key settings
 set which-key
-let g:WhichKey_FontSize = 16
-let g:WhichKey_CommandColor = "#41ead4"
-let g:WhichKey_PrefixColor = "#f335b2"
+set notimeout
+let g:WhichKey_FontSize = 20
+let g:WhichKey_PrefixColor = "#a403fe"
+let g:WhichKey_CommandColor = "#01ffff"
+let g:WhichKey_PrefixStyle = "bold"
+let g:WhichKey_KeyStyle = "italic"
 let g:WhichKey_SortOrder = "by_key_prefix_first"
+let g:WhichKey_ShowTypedSequence = "false"
 
-let g:WhichKeyDesc_leader = "<leader> Leader key"
+"" ========================================================
+"" Key mappings
+"" ========================================================
+" Tab navigation
+nmap <C-p> <Action>(PreviousTab)
+nmap <C-n> <Action>(NextTab)
 
-let g:WhichKeyDesc_leader = "<leader>x Open file explorer"
+" Pane navigation
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l 
+nnoremap <C-k> <C-w>k 
+nnoremap <C-j> <C-w>j
 
-let g:WhichKeyDesc_easymotion = "<leader>j Jump with Easymotion"
-let g:WhichKeyDesc_easymotion_prefix = "<leader><leader>"
+" Navigation actions
+nmap <C-i> <Action>(Back)
+nmap <C-o> <Action>(Forward)
 
-let g:WhichKeyDesc_comment = "<leader>c Comment line"
+" Navigation actions
+nmap å <Action>(MethodUp)
+nmap ¨ <Action>(MethodDown)
 
-let g:WhichKeyDesc_fold = "<leader>z Folding"
-let g:WhichKeyDesc_fold_all = "<leader>zc Fold all regions"
-let g:WhichKeyDesc_unfold_all = "<leader>zo Unfold all regions"
+" Visual Indentation
+vnoremap < <gv
+vnoremap > >gv
 
+"" ========================================================
+"" Leader Commands
+"" ========================================================
+
+" EasyMotion
+let g:WhichKeyDesc_easymotion = "<leader><leader> EasyMotion"
+
+" Information commands
+nmap <leader>ie <Action>(ShowErrorDescription)
+nmap <leader>ip <Action>(ParameterInfo)
+let g:WhichKeyDesc_info = "<leader>i Information"
+let g:WhichKeyDesc_info_error = "<leader>ie Error Description"
+let g:WhichKeyDesc_info_parameter = "<leader>ip Parameter Info"
+
+" Window splits
+nmap <leader>wv <action>(SplitVertically)
+nmap <leader>wh <action>(SplitHorizontally)
+nmap <leader>wu <action>(Unsplit)
+nmap <leader>wm <action>(MoveEditorToOppositeTabGroup)
+nmap <leader>wb <action>(Back)
+nmap <leader>wf <action>(Forward)
 let g:WhichKeyDesc_window = "<leader>w Window splits"
 let g:WhichKeyDesc_window_split_vertically = "<leader>wv Split vertically"
 let g:WhichKeyDesc_window_split_horizontally = "<leader>wh Split horizontally"
 let g:WhichKeyDesc_window_split_unsplit = "<leader>wu Unsplit"
 let g:WhichKeyDesc_window_split_move_editor = "<leader>wm Move editor to opposite tab group"
+let g:WhichKeyDesc_window_split_back = "<leader>wb Back split"
+let g:WhichKeyDesc_window_split_forward = "<leader>wf Forward split"
 
-
-let g:WhichKeyDesc_display = "<leader>d Display options"
-let g:WhichKeyDesc_zen_mode = "<leader>dz Toggle Zen mode"
-let g:WhichKeyDesc_df_mode = "<leader>dd Toggle Distraction-Free mode"
-let g:WhichKeyDesc_fullscreen = "<leader>df Toggle full screen"
-
-let g:WhichKeyDesc_action= "<leader>a Actions"
-let g:WhichKeyDesc_action_context_menu = "<leader>am Open context menu"
-let g:WhichKeyDesc_action_search = "<leader>as Open command modal"
-
-let g:WhichKeyDesc_file_quickLook = "<leader><leader> Recent files"
-
-let g:WhichKeyDesc_file_nav = "<leader>f File navigation"
-let g:WhichKeyDesc_file_nav_goto_file = "<leader>ff Go to file"
-let g:WhichKeyDesc_file_nav_goto_content = "<leader>fc Search for file content"
-let g:WhichKeyDesc_file_nav_show_recent_files = "<leader>fr Show recent files"
-let g:WhichKeyDesc_file_nav_show_recent_locations = "<leader>fl Show recent locations"
-
-let g:WhichKeyDesc_close_tab = "<leader>q Close active tab"
-
-let g:WhichKeyDesc_refactoring = "<leader>r Refactoring menu"
-let g:WhichKeyDesc_refactoring_rename = "<leader>rn Rename element"
-let g:WhichKeyDesc_refactoring_method = "<leader>rm Extract method"
-let g:WhichKeyDesc_refactoring_variable = "<leader>rv Introduce variable"
-let g:WhichKeyDesc_refactoring_field = "<leader>rf Introduce field"
-let g:WhichKeyDesc_refactoring_signature = "<leader>rs Change signature"
-let g:WhichKeyDesc_refactoring_all = "<leader>rr Open refactorings list"
-
-let g:WhichKeyDesc_goto = "<leader>g Go to X"
-let g:WhichKeyDesc_goto_declaration = "<leader>gd Go to Definition"
-let g:WhichKeyDesc_goto_type_declaration = "<leader>gy Go to Type Definition"
-let g:WhichKeyDesc_goto_implementation = "<leader>gi Go to Implementation"
-let g:WhichKeyDesc_goto_usages = "<leader>gu Go to Usages"
-let g:WhichKeyDesc_goto_test = "<leader>gt Go to Test"
-let g:WhichKeyDesc_goto_back = "<leader>gb Go Back"
-let g:WhichKeyDesc_goto_forward = "<leader>gf Go Forward"
-
-let g:WhichKeyDesc_git = "<leader>g Git operations"
-let g:WhichKeyDesc_git_commit = "<leader>gc Open Git commit dialog"
-let g:WhichKeyDesc_git_status = "<leader>gs Open Git status dialog"
-let g:WhichKeyDesc_git_branches = "<leader>gb Open Git branches list"
-
-let g:WhichKeyDesc_errors = "<leader>e Error navigation"
-let g:WhichKeyDesc_errors_next = "<leader>en Go to next error in solution"
-let g:WhichKeyDesc_errors_prev = "<leader>ep Go to previous error in solution"
-
-
-"" Key mappings
-"" ========================================================
-
-inoremap jk <Esc>
-
-" Tab navigation
-nnoremap <A-n> :tabnext<CR>
-nnoremap <A-p> :tabprev<CR>
-
-" Pane navigation
-nnoremap <A-h> <C-w>h
-nnoremap <A-l> <C-w>l
-nnoremap <A-k> <C-w>k
-nnoremap <A-j> <C-w>j
-
-" Jump between methods
-nnoremap [[ <Action>(MethodUp)
-nnoremap ]] <Action>(MethodDown)
-
-" Easy visual indentation
-vnoremap < <gv
-vnoremap > >gv
-
-" Execute macro saved in 'q' register
-nnoremap qj @q
-
-" Popup navigation
-inoremap <C-j> <Action>(PopupMenu-selectNext)
-inoremap <C-k> <Action>(PopupMenu-selectPrev)
-
-
-"" Leader commands
-"" ========================================================
-
-" Comment lines
-map <leader>c <action>(CommentByLineComment)
-
-" Jump around with easymotion
-map <leader>j <Plug>(easymotion-s)
-
-" Open NERDTree (use q to exit)
-map <leader>x :NERDTreeToggle<CR>
-
-" Folding
-map <leader>zc :action CollapseAllRegions<CR>
-map <leader>zo :action ExpandAllRegions<CR>
-
-" Window splits
-map <leader>wv <Action>(SplitVertically)
-map <leader>ws <Action>(SplitHorizontally)
-map <leader>wu <Action>(Unsplit)
-map <leader>wm <Action>(MoveEditorToOppositeTabGroup)
-
-" Display options
-map <leader>dd <action>(ToggleDistractionFreeMode)
-map <leader>dz <action>(ToggleZenMode)
-map <leader>df <action>(ToggleFullScreen)
-
-" Actions
-map <leader>am <action>(ShowIntentionActions)
-map <leader>as <action>(SearchEverywhere)
+" Tab Navigation and Management
+nmap <leader>tP <Action>(PinActiveEditorTab)
+nmap <leader>tx <Action>(CloseContent)
+nmap <leader>tX <Action>(CloseAllEditors)
+nmap <leader>to <Action>(CloseAllEditorsButActive)
+nmap <leader>ta <Action>(CloseAllUnpinnedEditors)
+let g:WhichKeyDesc_tabs = "<leader>t Tabs"
+let g:WhichKeyDesc_tabs_pin = "<leader>tP Pin Active Tab"
+let g:WhichKeyDesc_tabs_close = "<leader>tx Close Current Tab"
+let g:WhichKeyDesc_tabs_close_all = "<leader>tX Close All Tabs"
+let g:WhichKeyDesc_tabs_close_all_but_active = "<leader>to Close All Tabs But Active"
+let g:WhichKeyDesc_tabs_close_all_unpinned = "<leader>ta Close All Unpinned Tabs"
 
 " File navigation
-map <leader>ff <action>(GotoFile)
-map <leader>fr <action>(RecentFiles)
-map <leader>fc <action>(FindInPath)
-map <leader><leader> <Action>(RecentFiles)
-map <leader>fl <action>(RecentLocations)
-map <leader>fs <action>(NewScratchFile)
+nmap <leader>fg <Action>(GotoFile)
+nmap <leader>fr <Action>(RecentFiles)
+nmap <leader>fc <Action>(FindInPath)
+nmap <leader>fl <Action>(RecentLocations)
+nmap <leader>fs <Action>(NewScratchFile)
+nmap <leader>fe :NERDTreeToggle<CR>
+nmap <leader>fo <Action>(OpenFile)
+nmap <leader>fy <Action>(CopyAbsolutePath)
+nmap <leader>fp <Action>(ManageRecentProjects 
+nmap <leader>fh <Action>(LocalHistory.ShowHistory)
+nmap <leader>ff <Action>(ShowFilePath)
+nmap <leader>fi <Action>(SelectIn)
+nmap <leader>fp <Action>(ReplaceInPath)
+let g:WhichKeyDesc_file_opt = "<leader>f File navigation"
+let g:WhichKeyDesc_file_opt_goto_file = "<leader>fg Go To File"
+let g:WhichKeyDesc_file_opt_goto_content = "<leader>fc Find In Files"
+let g:WhichKeyDesc_file_opt_show_recent_files = "<leader>fr Recent Files"
+let g:WhichKeyDesc_file_opt_show_recent_locations = "<leader>fl Recent Locations"
+let g:WhichKeyDesc_file_opt_new_scratch_file = "<leader>fs New Scratch File"
+let g:WhichKeyDesc_file_opt_toggle_nerdtree = "<leader>fe Toggle NERDTree"
+let g:WhichKeyDesc_file_opt_open_file = "<leader>fo Open File"
+let g:WhichKeyDesc_file_opt_copy_path = "<leader>fy Copy Absolute Path"
+let g:WhichKeyDesc_file_opt_recent_projects = "<leader>fp Manage Recent Projects"
+let g:WhichKeyDesc_file_opt_history = "<leader>fh Show Local History"
+let g:WhichKeyDesc_file_opt_show_path = "<leader>ff Show File Path"
+let g:WhichKeyDesc_file_opt_select_in = "<leader>fi Select In"
+let g:WhichKeyDesc_file_opt_replace_in_path = "<leader>fp Replace In Path"
 
-" Close active tab
-map <leader>q <action>(CloseContent)
-
-" Refactoring
-map <leader>rn <Action>(RenameElement)
-map <leader>rm <Action>(ExtractMethod)
-map <leader>rv <Action>(IntroduceVariable)
-map <leader>rf <Action>(IntroduceField)
-map <leader>rs <Action>(ChangeSignature)
-map <leader>rr <Action>(Refactorings.QuickListPopupAction)
-
-" Go to code
+" Go To
 nmap <leader>gd <Action>(GotoDeclaration)
-nmap <leader>gy <Action>(GotoTypeDeclaration)
+nmap <leader>go <Action>(GotoSuperMethod)
+nmap <leader>gD <Action>(GotoTypeDeclaration)
 nmap <leader>gi <Action>(GotoImplementation)
-nmap <leader>gu <Action>(ShowUsages)
-nmap <leader>gt <Action>(GotoTest)
-nmap <leader>gf <Action>(Back)
-nmap <leader>gb <Action>(Forward)
+nmap <leader>gT <Action>(GotoTest)
+let g:WhichKeyDesc_goto = "<leader>g Go To"
+let g:WhichKeyDesc_goto_declaration = "<leader>gd Go To Declaration"
+let g:WhichKeyDesc_goto_super_method = "<leader>go Go To Super Method"
+let g:WhichKeyDesc_goto_type_declaration = "<leader>gD Go To Type Declaration"
+let g:WhichKeyDesc_goto_implementation = "<leader>gi Go To Implementation"
+let g:WhichKeyDesc_goto_test = "<leader>gT Go To Test"
 
-" Git windows
-map <leader>gc <Action>(CheckinProject)
-map <leader>gs <Action>(ActivateVersionControlToolWindow)
-map <leader>gb <Action>(Git.Branches)
+" Search
+nmap <leader>sa <action>(SearchEverywhere)
+nmap <leader>su <Action>(FindUsages)
+nmap <leader>sa <Action>(GotoAction)
+nmap <leader>sc <Action>(GotoClass)
+nmap <leader>sf <Action>(GotoFile)
+nmap <leader>ss <Action>(GotoSymbol)
+nmap <leader>st <Action>(TextSearchAction)
+let g:WhichKeyDesc_search = "<leader>s Search"
+let g:WhichKeyDesc_search_everywhere = "<leader>sa Search Everywhere"
+let g:WhichKeyDesc_search_usages = "<leader>su Find Usages"
+let g:WhichKeyDesc_search_action = "<leader>sa Search Action"
+let g:WhichKeyDesc_search_class = "<leader>sc Search Class"
+let g:WhichKeyDesc_search_file = "<leader>sf Search File"
+let g:WhichKeyDesc_search_symbol = "<leader>ss Search Symbol"
+let g:WhichKeyDesc_search_text = "<leader>st Search Text"
 
-" Errors
-map <leader>en <Action>(ReSharperGotoNextErrorInSolution)
-map <leader>ep <Action>(ReSharperGotoPrevErrorInSolution)
-
+" Reload vim rc
+nmap <leader>vr <action>(IdeaVim.ReloadVimRc.reload)
+let g:WhichKeyDesc_vim = "<leader>v Vim"
+let g:WhichKeyDesc_vim_reload = "<leader>vr Vim Reload Source 
